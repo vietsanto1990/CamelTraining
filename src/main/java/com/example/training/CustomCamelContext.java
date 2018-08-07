@@ -1,6 +1,7 @@
 package com.example.training;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
@@ -11,10 +12,15 @@ import org.springframework.context.annotation.Configuration;
 public class CustomCamelContext {
 
 	@Bean
-	public DataFormat bindy() {
+	public DataFormat csvBindy() {
 		return new BindyCsvDataFormat(com.example.training.model.Staff.class);
 	}
-
+	
+	@Bean
+	public DataFormat jsonDataFormat() {
+		return new JacksonDataFormat(com.example.training.model.Staff.class);
+	}
+	
 	@Bean
 	CamelContextConfiguration contextConfiguration() {
 		return new CamelContextConfiguration() {

@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class CameTrainingApplication {
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(CameTrainingApplication.class, args);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 	}
 }
