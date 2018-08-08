@@ -13,12 +13,12 @@ public class CustomCamelContext {
 
 	@Bean
 	public DataFormat csvBindy() {
-		return new BindyCsvDataFormat(com.example.training.model.Staff.class);
+		return new BindyCsvDataFormat(com.example.training.entity.Staff.class);
 	}
 	
 	@Bean
 	public DataFormat jsonDataFormat() {
-		return new JacksonDataFormat(com.example.training.model.Staff.class);
+		return new JacksonDataFormat(com.example.training.entity.Staff.class);
 	}
 	
 	@Bean

@@ -1,4 +1,4 @@
-package com.example.training.model;
+package com.example.training.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

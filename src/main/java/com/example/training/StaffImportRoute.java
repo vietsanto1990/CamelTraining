@@ -25,6 +25,6 @@ public class StaffImportRoute extends RouteBuilder {
 			.unmarshal(bindy).to("direct:processStaff");
 
 		from("direct:processStaff").routeId("processStaffRoute")
-			.to("bean:staffService?method=save").log("Save successfully").end();
+			.to("jpa://com.example.training.entity.Staff?entityType=java.util.ArrayList").log("Save successfully").end();
 	}
 }
