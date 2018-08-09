@@ -7,10 +7,11 @@ import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StaffProccessor implements Processor{
+public class StaffProccessor implements Processor {
 	@Override
 	public void process(Exchange exchange) throws Exception {
 		Calendar calendar = Calendar.getInstance();
 		exchange.getIn().setHeader("timestamp", calendar.getTimeInMillis());
+//		System.out.println("body : " + exchange.getIn().getBody().toString());
 	}
 }

@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
@@ -14,7 +13,6 @@ import org.apache.camel.dataformat.bindy.annotation.DataField;
 @Entity
 @Table(name = "staff")
 @CsvRecord(separator = ",", skipFirstLine = true)
-@NamedQuery(name = "fetchAllStaff", query = "select s from Staff s")
 public class Staff {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CameTrainingApplication {
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(CameTrainingApplication.class, args);
-		Thread.sleep(5000);
+		Thread.sleep(50000);
 	}
 }
