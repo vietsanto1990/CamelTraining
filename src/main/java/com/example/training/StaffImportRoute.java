@@ -15,16 +15,16 @@ public class StaffImportRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from("{{ftp.uri}}?username={{ftp.username}}&password={{ftp.password}}&doneFileName=done.txt&fileName=Staff.csv&delete=true&localWorkDirectory=/receives/tmp&moveFailed=.Failed")
+		from("${ftp.uri}&doneFileName=done.txt&fileName=Staff.csv&delete=true&localWorkDirectory=/receives/tmp&moveFailed=.Failed")
       .routeId("downloadStaffRoute")
-      .to("file:D:/receives")
+      .to("${file.local}")
+      .to("mock://result")
       .log("download file complete");
 
-//		from("file:D:/receives?fileName=Staff.csv&noop=true").routeId("csvParseStaffRoute").unmarshal(bindy).to("direct:processStaff");
-		from("file:D:/receives?fileName=Staff.csv").routeId("csvParseStaffRoute")
-			.unmarshal(bindy).to("direct:processStaff");
+		from("${file.local}?fileName=Staff.csv").routeId("csvParseStaffRoute")
+			.unmarshal(bindy).to("direct:saveStaffs").to("mock://result");
 
-		from("direct:processStaff").routeId("processStaffRoute")
-			.to("jpa://com.example.training.entity.Staff?entityType=java.util.ArrayList").log("Save successfully").end();
+		from("direct:saveStaffs").routeId("saveStaffsRoute")
+			.to("jpa://com.example.training.entity.Staff?entityType=java.util.ArrayList").log("Save successfully").to("mock://result");
 	}
 }
