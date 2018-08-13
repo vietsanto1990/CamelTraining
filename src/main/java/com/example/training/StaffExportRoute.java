@@ -60,16 +60,16 @@ public class StaffExportRoute extends RouteBuilder {
 			    .completionPredicate(exchangeProperty(Exchange.SPLIT_COMPLETE).isEqualTo(true))
 			    .completionTimeout(2000)
 			    .marshal(jsonFormat)
-			    .to("${file.local}/Jsontmp?fileName=Staff.json&fileExist=Append&doneFileName=done.txt")
+			    .to("{{file.local}}/Jsontmp?fileName=Staff.json&fileExist=Append&doneFileName=done.txt")
 			    .end()
 		    .end()
 		    .to("direct:exportStaff");
 
 		from("direct:exportStaff").routeId("exportJsonLocalRoute")
 			.routeId("exportJsonToFtp")
-			.pollEnrich("${file.local}/Jsontmp?doneFileName=done.txt&delete=true")
+			.pollEnrich("{{file.local}}/Jsontmp?doneFileName=done.txt&delete=true")
 			.process(processor)
-			.to("${ftp.uri}&fileName=Staff-${header.timestamp}.json");
+			.to("{{ftp.json.uri}}&fileName=Staff-${header.timestamp}.json");
 
 	}
 }

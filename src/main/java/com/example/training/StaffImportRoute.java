@@ -15,13 +15,13 @@ public class StaffImportRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from("${ftp.uri}&doneFileName=done.txt&fileName=Staff.csv&delete=true&localWorkDirectory=/receives/tmp&moveFailed=.Failed")
+		from("{{ftp.uri}}&doneFileName=done.txt&fileName=Staff.csv&delete=true&localWorkDirectory=/receives/tmp&moveFailed=.Failed")
       .routeId("downloadStaffRoute")
-      .to("${file.local}")
+      .to("{{file.local}}")
       .to("mock://result")
       .log("download file complete");
 
-		from("${file.local}?fileName=Staff.csv").routeId("csvParseStaffRoute")
+		from("{{file.local}}?fileName=Staff.csv").routeId("csvParseStaffRoute")
 			.unmarshal(bindy).to("direct:saveStaffs").to("mock://result");
 
 		from("direct:saveStaffs").routeId("saveStaffsRoute")
