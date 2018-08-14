@@ -12,6 +12,5 @@ public class StaffProccessor implements Processor {
 	public void process(Exchange exchange) throws Exception {
 		Calendar calendar = Calendar.getInstance();
 		exchange.getIn().setHeader("timestamp", calendar.getTimeInMillis());
-//		System.out.println("body : " + exchange.getIn().getBody().toString());
 	}
 }
